@@ -1,0 +1,32 @@
+.main-page-button{
+    margin-left: 20px;
+}
+.search-field{
+    width: 500px;
+    height: 50px;
+}
+
+.main-div{
+    background: url("/img/background_main.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+.my_table{
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.my_table > tr > th, .my_table > tr > td, .my_table>td{
+    border-collapse: collapse;
+    padding: 5px;
+    border: 1px solid black;
+}
+.my_table_in{
+    border-collapse: collapse;
+    border: none;
+}
+.v_align{
+   vertical-align: middle !important;
+    text-align: center;
+}
