@@ -4,13 +4,12 @@
      <p class = 'text-danger h2'><?= $message ?></p>
     <?php }?>
     <div class="row d-flex justify-content-center align-middle">
-        <div class="col-8 d-flex justify-content-center">
             <?php
-                echo form_open("main/analysis", array('class' => 'd-flex justify-content-between'));
+                echo form_open("main/analysis", array('class' => 'form-inline'));
             ?>
-                <input type="text" class="form-control search-field" name = "url"placeholder="Введите URL для анализа">
-                <button type="submit" class="btn btn-success font-weight-bold main-page-button">Получить отчет</button>
+                <input type="text" class="form-control search-field" size="35" name = "url"placeholder="Введите http://... для анализа">
+                <br>
+                <button type="submit" class="btn btn-success font-weight-bold">Получить отчет</button>
             </form>
-        </div>
     </div>
 </div>

@@ -101,7 +101,7 @@ class Main extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('PHPExcel');
     }
-    
+
     public function index($message = '')
     {
         $data['title'] = 'Robots analysing';
