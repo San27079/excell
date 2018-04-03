@@ -222,7 +222,11 @@ class Main extends CI_Controller
             $answer['recomendation'] = $this->header_200_status['0']['recomendation'];
             $answer['status'] = 'Ошибка';
             $answer['status_class'] = $this->status_classes[0];
-            $stat= 0;
+            if($status == 301){
+                $stat= 1;
+            } else {
+                $stat = 0;
+            }
         }
         return [$answer, $stat];
     }
