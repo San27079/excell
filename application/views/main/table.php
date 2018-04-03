@@ -3,7 +3,7 @@
         <div class="col-12 d-flex justify-content-between">
             <h2>Получить файл в формате excel</h2>
             <a class = "btn btn-success" href="/temp/file.xls">Скачать</a>
-            <h2>Продолжить провреку файлов</h2>
+            <h2>Продолжить проверку файлов</h2>
             <a class = "btn btn-success" href="/">Проверить еще</a>
         </div>
     </div>
