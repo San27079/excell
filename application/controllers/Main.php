@@ -101,8 +101,7 @@ class Main extends CI_Controller
         $this->load->library('form_validation');
         $this->load->library('PHPExcel');
     }
-
-
+    
     public function index($message = '')
     {
         $data['title'] = 'Robots analysing';
@@ -176,7 +175,6 @@ class Main extends CI_Controller
         return [$answer, $bool];
 
     }
-
 
     private function check_robots($url)
     {
@@ -286,7 +284,6 @@ class Main extends CI_Controller
         $sheet = $xls->getActiveSheet();
         $sheet->setTitle('robots');
 
-
         $sheet->getRowDimension(2)->setRowHeight(20);
         $sheet->setCellValue("A1", $data['title']);
         $sheet->setCellValue("A2", '№');
@@ -346,7 +343,6 @@ class Main extends CI_Controller
             $sheet->setCellValue("E".$i, $item['state']);
             $sheet->setCellValue("E".($i+1), $item['recomendation']);
 
-
             //set styles
             $sheet->getStyle("A".$i)->getAlignment()->setWrapText(true);
             $sheet->getStyle("B".$i)->getAlignment()->setWrapText(true);
@@ -382,24 +378,13 @@ class Main extends CI_Controller
                 $sheet->getStyle('C'.($i))->applyFromArray($color_green);
             }
 
-
-
-
-
-
-
-
             $i += 3;
             $j++;
         }
-
-
         $objWriter = new PHPExcel_Writer_Excel5($xls);
         if(file_exists($_SERVER['DOCUMENT_ROOT'].'/temp/file.xls')){
             unlink($_SERVER['DOCUMENT_ROOT'].'/temp/file.xls');
         }
         $objWriter->save($_SERVER['DOCUMENT_ROOT'].'/temp/file.xls');
     }
-
-
 }
