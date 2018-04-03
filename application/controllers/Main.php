@@ -133,13 +133,13 @@ class Main extends CI_Controller
     public function table($url)
     {
         $data['title'] = 'Robots file analyse ' .$url;
-        $data['file'][] = $this->check200($url)[0];
-
-        if(!$this->check200($url)[1]){
-            $this->render_table($data);
-            exit;
-        };
+        $check_200 = $this->check200($url);
+        $data['file'][] = $check_200[0];
         $data['file'][] = $this->check_robots($url);
+        if($check_200[1] === 0){
+            $this->render_table($data);
+            return;
+        };
         $data['file'][] = $this->check_robots_size();
         $data['file'][] = $this->check_host()[0];
         if($this->check_host()[1]){
@@ -184,9 +184,15 @@ class Main extends CI_Controller
 
     private function check_robots($url)
     {
-        $this->loaded_file = file_get_contents($url);
+        $stat = 1;
+        if(@fopen($url, 'r')){
+            $this->loaded_file = file_get_contents($url);
+        }else{
+            $stat = 0;
+        };
         $answer['name'] = $this->name_test['robots'];
-        if(!empty($this->loaded_file)){
+
+        if($stat){
             $answer['state'] = $this->robots_status['1']['state'];
             $answer['recomendation'] = $this->robots_status['1']['recomendation'];
             $answer['status'] = 'Ок';
@@ -204,21 +210,21 @@ class Main extends CI_Controller
     {
         $status = get_headers($url);
         $status = explode(' ', $status[0])[1];
-        $answer_200['name'] = $this->name_test['status'];
-        $bool = true;
+        $answer['name'] = $this->name_test['status'];
+        $stat = 1;
         if($status == 200){
-            $answer_200['state'] = $this->header_200_status['1']['state'];
-            $answer_200['recomendation'] = $this->header_200_status['1']['recomendation'];
-            $answer_200['status'] = 'Ок';
-            $answer_200['status_class'] = $this->status_classes[1];
+            $answer['state'] = $this->header_200_status['1']['state'];
+            $answer['recomendation'] = $this->header_200_status['1']['recomendation'];
+            $answer['status'] = 'Ок';
+            $answer['status_class'] = $this->status_classes[1];
         }else{
-            $answer_200['state'] = $this->header_200_status['0']['state'].$status;
-            $answer_200['recomendation'] = $this->header_200_status['0']['recomendation'];
-            $answer_200['status'] = 'Ошибка';
-            $answer_200['status_class'] = $this->status_classes[0];
-            $bool = false;
+            $answer['state'] = $this->header_200_status['0']['state'].$status;
+            $answer['recomendation'] = $this->header_200_status['0']['recomendation'];
+            $answer['status'] = 'Ошибка';
+            $answer['status_class'] = $this->status_classes[0];
+            $stat= 0;
         }
-        return [$answer_200, $bool];
+        return [$answer, $stat];
     }
 
     private function check_sitemap()
