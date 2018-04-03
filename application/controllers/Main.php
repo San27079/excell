@@ -287,13 +287,40 @@ class Main extends CI_Controller
         $sheet->setTitle('robots');
 
 
-
+        $sheet->getRowDimension(2)->setRowHeight(20);
         $sheet->setCellValue("A1", $data['title']);
         $sheet->setCellValue("A2", '№');
         $sheet->setCellValue("B2", 'Название проверки');
         $sheet->setCellValue("C2", 'Статус');
         $sheet->setCellValue("D2", '');
         $sheet->setCellValue("E2", 'Текущее состояние');
+
+        $color_head = array(
+            'fill' => array(
+                'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('rgb' => '85A4D3')
+            )
+        );
+
+        $color_red = array(
+            'fill' => array(
+                'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('rgb' => '913034')
+            )
+        );
+
+        $color_green = array(
+            'fill' => array(
+                'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('rgb' => '00913E')
+            )
+        );
+
+        $sheet->getStyle('A2')->applyFromArray($color_head);
+        $sheet->getStyle('B2')->applyFromArray($color_head);
+        $sheet->getStyle('C2')->applyFromArray($color_head);
+        $sheet->getStyle('D2')->applyFromArray($color_head);
+        $sheet->getStyle('E2')->applyFromArray($color_head);
 
         $i = 3;
         $j = 1;
@@ -343,6 +370,17 @@ class Main extends CI_Controller
 
             //colors
 
+            $sheet->getStyle('A'.($i+2))->applyFromArray($color_head);
+            $sheet->getStyle('B'.($i+2))->applyFromArray($color_head);
+            $sheet->getStyle('C'.($i+2))->applyFromArray($color_head);
+            $sheet->getStyle('D'.($i+2))->applyFromArray($color_head);
+            $sheet->getStyle('E'.($i+2))->applyFromArray($color_head);
+
+            if(!strnatcasecmp($item['status_class'], 'bg-danger')){
+                $sheet->getStyle('C'.($i))->applyFromArray($color_red);
+            }else{
+                $sheet->getStyle('C'.($i))->applyFromArray($color_green);
+            }
 
 
 
