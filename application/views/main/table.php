@@ -1,9 +1,8 @@
 <div class="container-fluid">
     <div class ="row">
-        <div class="col-12 d-flex justify-content-between">
-            <h2>Получить файл в формате excel</h2>
-            <a class = "btn btn-success" href="/temp/file.xls">Скачать</a>
-            <h2>Продолжить проверку файлов</h2>
+        <div class="col-12">
+            <h1 class="text-center">Результаты проверки сайта</h1>
+            <a class = "btn btn-success" href="/temp/file.xls">Скачать xls</a>
             <a class = "btn btn-success" href="/">Проверить еще</a>
         </div>
     </div>

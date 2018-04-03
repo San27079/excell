@@ -120,6 +120,10 @@ class Main extends CI_Controller
             $this->index($text);
         }else {
             $url = rtrim($this->input->post('url'), '/').'/robots.txt';
+            $count = substr_count($url,'http://');
+            if(!$count){
+                $url = 'http://'.$url;
+            }
             $this->table($url);
         }
     }
